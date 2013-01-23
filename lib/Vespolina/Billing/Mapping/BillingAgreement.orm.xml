@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Vespolina\Entity\Billing\BillingAgreement">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="billingAmount" type="float" />
+        <field name="billingCycles" type="integer" />
+        <field name="billingInterval" type="integer" />
+        <field name="initialBillingDate" type="datetime" />
+        <field name="paymentGateway" type="string" />
+
+        <one-to-one field="partner" target-entity="Vespolina\Entity\Partner\PartnerInterface">
+            <join-column name="partner_id" referenced-column-name="id" />
+        </one-to-one>
+        <many-to-one field="orders" target-entity="Vespolina\Entity\Order\OrderInterface">
+            <join-column name="order_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
